@@ -437,7 +437,7 @@ absl::Status UmpPipeline::LoadResourceFile(const std::string& filename, std::str
 	out_str.clear();
 
 	std::string path;
-	ASSIGN_OR_RETURN(path, mediapipe::PathToResourceAsFile(filename));
+	MP_ASSIGN_OR_RETURN(path, mediapipe::PathToResourceAsFile(filename));
 
 	RET_CHECK_OK(mediapipe::file::GetContents(path, &out_str));
 
