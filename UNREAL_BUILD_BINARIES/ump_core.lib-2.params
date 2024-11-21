@@ -1,0 +1,6 @@
+/nologo
+/OUT:bazel-out/x64_windows-opt/bin/mediapipe/unreal/ump_core.lib
+/MACHINE:X64
+bazel-out/x64_windows-opt/bin/mediapipe/unreal/_objs/ump_core/ump_context.obj
+bazel-out/x64_windows-opt/bin/mediapipe/unreal/_objs/ump_core/ump_pipeline.obj
+/ignore:4221
