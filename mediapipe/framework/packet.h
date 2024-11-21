@@ -445,6 +445,8 @@ class HolderBase {
   // Get the type id of the underlying data type.
   virtual TypeId GetTypeId() const = 0;
 
+  const void* const GetRaw() const; // UMP
+
   // Downcasts this to Holder<T>.  Returns nullptr if deserialization
   // failed or if the requested type is not what is stored.
   template <typename T>
@@ -557,6 +559,9 @@ class Holder : public HolderBase, private HolderPayloadRegistrator<T> {
   ~Holder() override { delete_helper(); }
   const T& data() const { return *ptr_; }
   TypeId GetTypeId() const final { return kTypeId<T>; }
+
+  const void* const GetRaw() const final { return &data() }; // UMP
+
   // Releases the underlying data pointer and transfers the ownership to a
   // unique pointer.
   // This method is dangerous and is only used by Packet::Consume() if the
@@ -807,6 +812,8 @@ inline TypeId Packet::GetTypeId() const {
   ABSL_CHECK(holder_);
   return holder_->GetTypeId();
 }
+
+inline const void* const Packet::GetRaw() const { return holder_->GetRaw(); } // UMP
 
 template <typename T>
 inline const T& Packet::Get() const {
